@@ -1,0 +1,11 @@
+{
+    "name": "saccas/hitobito-json-api-model",
+    "require": {
+        "saccas/json-api-model": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Saccas\\HitobitoApi\\": "src/"
+        }
+    }
+}
