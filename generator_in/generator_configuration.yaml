@@ -1,0 +1,40 @@
+model_schemas:
+  courses:
+    endpoint: /api/events
+    relationships:
+      kind: {targetSchema: event_kinds}
+      contact: {targetSchema: people}
+      leaders: {targetSchema: people}
+  dates:
+    relationships:
+      event: {targetSchema: events}
+  events:
+    contact: {targetSchema: people}
+  event_kinds:
+    relationships:
+      kind_category: {targetSchema: event_kind_categories}
+      level: {targetSchema: event_levels}
+  groups:
+    relationships:
+      contact: {targetSchema: people}
+      creator: {targetSchema: people}
+      updater: {targetSchema: people}
+      deleter: {targetSchema: people}
+      parent: {targetSchema: groups}
+      layer_group: {targetSchema: groups}
+  invoice_items:
+    relationships:
+      invoice: {targetSchema: invoices}
+  invoices:
+    relationships:
+      group: {targetSchema: groups}
+      recipient: {targetSchema: people}
+  people:
+    relationships:
+      primary_group: {targetSchema: groups}
+      layer_group: {targetSchema: groups}
+  roles:
+    relationships:
+      person: {targetSchema: people}
+      group: {targetSchema: groups}
+      layer_group: {targetSchema: groups}
