@@ -2,6 +2,9 @@
 
 namespace Saccas\HitobitoApi\Repository;
 
+/**
+ * @implements \Saccas\JsonApiModel\JsonApiRepository<\Saccas\HitobitoApi\Model\EventKindCategories>
+ */
 class EventKindCategoriesRepository extends \Saccas\JsonApiModel\JsonApiRepository
 {
 	protected string $endpoint = '/api/event_kind_categories';

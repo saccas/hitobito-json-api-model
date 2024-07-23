@@ -2,6 +2,9 @@
 
 namespace Saccas\HitobitoApi\Repository;
 
+/**
+ * @implements \Saccas\JsonApiModel\JsonApiRepository<\Saccas\HitobitoApi\Model\PhoneNumbers>
+ */
 class PhoneNumbersRepository extends \Saccas\JsonApiModel\JsonApiRepository
 {
 	protected string $endpoint = '/api/phone_numbers';
