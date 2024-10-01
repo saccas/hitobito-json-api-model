@@ -3,7 +3,7 @@
 namespace Saccas\HitobitoApi\Repository;
 
 /**
- * @implements \Saccas\JsonApiModel\JsonApiRepository<\Saccas\HitobitoApi\Model\EventKinds>
+ * @extends \Saccas\JsonApiModel\JsonApiRepository<\Saccas\HitobitoApi\Model\EventKinds>
  */
 class EventKindsRepository extends \Saccas\JsonApiModel\JsonApiRepository
 {

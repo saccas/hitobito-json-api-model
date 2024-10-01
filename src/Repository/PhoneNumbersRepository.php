@@ -3,7 +3,7 @@
 namespace Saccas\HitobitoApi\Repository;
 
 /**
- * @implements \Saccas\JsonApiModel\JsonApiRepository<\Saccas\HitobitoApi\Model\PhoneNumbers>
+ * @extends \Saccas\JsonApiModel\JsonApiRepository<\Saccas\HitobitoApi\Model\PhoneNumbers>
  */
 class PhoneNumbersRepository extends \Saccas\JsonApiModel\JsonApiRepository
 {
