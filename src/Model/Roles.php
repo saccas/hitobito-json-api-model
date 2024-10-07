@@ -10,30 +10,6 @@ class Roles extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getPersonId(): ?int
-	{
-		return $this->getAttribute('person_id');
-	}
-
-
-	public function getGroupId(): ?int
-	{
-		return $this->getAttribute('group_id');
-	}
-
-
-	public function getLabel(): ?string
-	{
-		return $this->getAttribute('label');
-	}
-
-
-	public function getType(): ?string
-	{
-		return $this->getAttribute('type');
-	}
-
-
 	public function getCreatedAt(): ?\DateTime
 	{
 		return $this->getDateAttribute('created_at');
@@ -49,6 +25,30 @@ class Roles extends \Saccas\JsonApiModel\JsonApiModel
 	public function getDeletedAt(): ?\DateTime
 	{
 		return $this->getDateAttribute('deleted_at');
+	}
+
+
+	public function getPersonId(): ?int
+	{
+		return $this->getAttribute('person_id');
+	}
+
+
+	public function getGroupId(): ?int
+	{
+		return $this->getAttribute('group_id');
+	}
+
+
+	public function getType(): ?string
+	{
+		return $this->getAttribute('type');
+	}
+
+
+	public function getLabel(): ?string
+	{
+		return $this->getAttribute('label');
 	}
 
 

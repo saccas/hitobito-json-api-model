@@ -40,6 +40,18 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getParentId(): ?int
+	{
+		return $this->getAttribute('parent_id');
+	}
+
+
+	public function getLayerGroupId(): ?int
+	{
+		return $this->getAttribute('layer_group_id');
+	}
+
+
 	public function getType(): ?string
 	{
 		return $this->getAttribute('type');
@@ -124,18 +136,6 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getSacNewsletterMailingListId(): ?string
-	{
-		return $this->getAttribute('sac_newsletter_mailing_list_id');
-	}
-
-
-	public function getCourseAdminEmail(): ?string
-	{
-		return $this->getAttribute('course_admin_email');
-	}
-
-
 	public function getFoundationYear(): ?string
 	{
 		return $this->getAttribute('foundation_year');
@@ -157,6 +157,30 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	public function getMitgliedTerminationBySectionOnly(): ?string
 	{
 		return $this->getAttribute('mitglied_termination_by_section_only');
+	}
+
+
+	public function getCourseAdminEmail(): ?string
+	{
+		return $this->getAttribute('course_admin_email');
+	}
+
+
+	public function getSacNewsletterMailingListId(): ?string
+	{
+		return $this->getAttribute('sac_newsletter_mailing_list_id');
+	}
+
+
+	public function getSacMagazineMailingListId(): ?string
+	{
+		return $this->getAttribute('sac_magazine_mailing_list_id');
+	}
+
+
+	public function getSacFundraisingMailingListId(): ?string
+	{
+		return $this->getAttribute('sac_fundraising_mailing_list_id');
 	}
 
 

@@ -4,7 +4,7 @@ namespace Saccas\HitobitoApi;
 
 class HitobitoApi extends \Saccas\JsonApiModel\JsonApiManager
 {
-	public array $schemaRepositoryClassMap = ['additional_emails' => Repository\AdditionalEmailsRepository::class, 'courses' => Repository\CoursesRepository::class, 'dates' => Repository\DatesRepository::class, 'event_kind_categories' => Repository\EventKindCategoriesRepository::class, 'event_kinds' => Repository\EventKindsRepository::class, 'event_levels' => Repository\EventLevelsRepository::class, 'events' => Repository\EventsRepository::class, 'groups' => Repository\GroupsRepository::class, 'invoice_items' => Repository\InvoiceItemsRepository::class, 'invoices' => Repository\InvoicesRepository::class, 'person-name' => Repository\PersonNameRepository::class, 'people' => Repository\PeopleRepository::class, 'phone_numbers' => Repository\PhoneNumbersRepository::class, 'roles' => Repository\RolesRepository::class, 'social_accounts' => Repository\SocialAccountsRepository::class, ];
+	public array $schemaRepositoryClassMap = ['additional_emails' => Repository\AdditionalEmailsRepository::class, 'courses' => Repository\CoursesRepository::class, 'dates' => Repository\DatesRepository::class, 'event_kind_categories' => Repository\EventKindCategoriesRepository::class, 'event_kinds' => Repository\EventKindsRepository::class, 'event_levels' => Repository\EventLevelsRepository::class, 'events' => Repository\EventsRepository::class, 'external_invoices' => Repository\ExternalInvoicesRepository::class, 'groups' => Repository\GroupsRepository::class, 'invoice_items' => Repository\InvoiceItemsRepository::class, 'invoices' => Repository\InvoicesRepository::class, 'person-name' => Repository\PersonNameRepository::class, 'people' => Repository\PeopleRepository::class, 'phone_numbers' => Repository\PhoneNumbersRepository::class, 'roles' => Repository\RolesRepository::class, 'social_accounts' => Repository\SocialAccountsRepository::class, ];
 
 
 	public function getAdditionalEmailsRepository(): Repository\AdditionalEmailsRepository
@@ -46,6 +46,12 @@ class HitobitoApi extends \Saccas\JsonApiModel\JsonApiManager
 	public function getEventsRepository(): Repository\EventsRepository
 	{
 		return $this->getRepository('events');
+	}
+
+
+	public function getExternalInvoicesRepository(): Repository\ExternalInvoicesRepository
+	{
+		return $this->getRepository('external_invoices');
 	}
 
 

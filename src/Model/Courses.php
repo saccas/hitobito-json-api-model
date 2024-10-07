@@ -208,6 +208,48 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getPriceMember(): ?int
+	{
+		return $this->getAttribute('price_member');
+	}
+
+
+	public function getPriceRegular(): ?int
+	{
+		return $this->getAttribute('price_regular');
+	}
+
+
+	public function getPriceSubsidized(): ?int
+	{
+		return $this->getAttribute('price_subsidized');
+	}
+
+
+	public function getPriceJsActiveMember(): ?int
+	{
+		return $this->getAttribute('price_js_active_member');
+	}
+
+
+	public function getPriceJsActiveRegular(): ?int
+	{
+		return $this->getAttribute('price_js_active_regular');
+	}
+
+
+	public function getPriceJsPassiveMember(): ?int
+	{
+		return $this->getAttribute('price_js_passive_member');
+	}
+
+
+	public function getPriceJsPassiveRegular(): ?int
+	{
+		return $this->getAttribute('price_js_passive_regular');
+	}
+
+
 	public function getContact(): ?People
 	{
 		return $this->getRelationSingle('contact', \Saccas\HitobitoApi\Model\People::class);
