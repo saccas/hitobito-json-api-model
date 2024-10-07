@@ -1,5 +1,5 @@
 # https://sac-cas.puzzle.ch/api/openapi.yaml
-# Downloaded 2024-04-28
+# Downloaded 2024-10-07 11:07
 openapi: 3.0.1
 info:
   title: Hitobito JSON:API
@@ -293,6 +293,38 @@ components:
           "$ref": "#/components/links/updateEventId"
         deleteEventId:
           "$ref": "#/components/links/deleteEventId"
+    external_invoices_200:
+      description: 'OK: External invoice resource'
+      content:
+        application/vnd.api+json:
+          schema:
+            "$ref": "#/components/schemas/external_invoices_single"
+      links:
+        getExternalInvoiceId:
+          "$ref": "#/components/links/getExternalInvoiceId"
+        updateExternalInvoiceId:
+          "$ref": "#/components/links/updateExternalInvoiceId"
+        deleteExternalInvoiceId:
+          "$ref": "#/components/links/deleteExternalInvoiceId"
+    external_invoices_200_collection:
+      description: 'OK: External invoices collection'
+      content:
+        application/vnd.api+json:
+          schema:
+            "$ref": "#/components/schemas/external_invoices_collection"
+    external_invoices_201:
+      description: Created
+      content:
+        application/vnd.api+json:
+          schema:
+            "$ref": "#/components/schemas/external_invoices_single"
+      links:
+        getExternalInvoiceId:
+          "$ref": "#/components/links/getExternalInvoiceId"
+        updateExternalInvoiceId:
+          "$ref": "#/components/links/updateExternalInvoiceId"
+        deleteExternalInvoiceId:
+          "$ref": "#/components/links/deleteExternalInvoiceId"
     groups_200:
       description: 'OK: Group resource'
       content:
@@ -560,6 +592,7 @@ components:
         - event_kinds
         - event_levels
         - events
+        - external_invoices
         - groups
         - invoice_items
         - invoices
@@ -590,7 +623,7 @@ components:
       properties:
         id:
           type: string
-          example: '76'
+          example: '38'
         type:
           type: string
           enum:
@@ -795,6 +828,34 @@ components:
         program:
           type: string
           readOnly: true
+        price_member:
+          type: number
+          format: float
+          readOnly: true
+        price_regular:
+          type: number
+          format: float
+          readOnly: true
+        price_subsidized:
+          type: number
+          format: float
+          readOnly: true
+        price_js_active_member:
+          type: number
+          format: float
+          readOnly: true
+        price_js_active_regular:
+          type: number
+          format: float
+          readOnly: true
+        price_js_passive_member:
+          type: number
+          format: float
+          readOnly: true
+        price_js_passive_regular:
+          type: number
+          format: float
+          readOnly: true
       additionalProperties: false
     courses_relationships:
       type: object
@@ -841,7 +902,7 @@ components:
       properties:
         id:
           type: string
-          example: '6'
+          example: '53'
         type:
           type: string
           enum:
@@ -940,6 +1001,13 @@ components:
         - specialities
         - similar_tours
         - program
+        - price_member
+        - price_regular
+        - price_subsidized
+        - price_js_active_member
+        - price_js_active_regular
+        - price_js_passive_member
+        - price_js_passive_regular
     courses_sortable_attributes_list:
       description: Course sortable attributes
       type: array
@@ -968,6 +1036,20 @@ components:
           - "-similar_tours"
           - program
           - "-program"
+          - price_member
+          - "-price_member"
+          - price_regular
+          - "-price_regular"
+          - price_subsidized
+          - "-price_subsidized"
+          - price_js_active_member
+          - "-price_js_active_member"
+          - price_js_active_regular
+          - "-price_js_active_regular"
+          - price_js_passive_member
+          - "-price_js_passive_member"
+          - price_js_passive_regular
+          - "-price_js_passive_regular"
       uniqueItems: true
     courses_related:
       description: Course relationships available for inclusion
@@ -1020,7 +1102,7 @@ components:
       properties:
         id:
           type: string
-          example: '1'
+          example: '19'
         type:
           type: string
           enum:
@@ -1123,7 +1205,7 @@ components:
       properties:
         id:
           type: string
-          example: '3'
+          example: '71'
         type:
           type: string
           enum:
@@ -1276,7 +1358,7 @@ components:
       properties:
         id:
           type: string
-          example: '88'
+          example: '89'
         type:
           type: string
           enum:
@@ -1406,7 +1488,7 @@ components:
       properties:
         id:
           type: string
-          example: '42'
+          example: '67'
         type:
           type: string
           enum:
@@ -1584,7 +1666,7 @@ components:
       properties:
         id:
           type: string
-          example: '45'
+          example: '22'
         type:
           type: string
           enum:
@@ -1684,6 +1766,182 @@ components:
           - contact
           - dates
       uniqueItems: true
+    external_invoices:
+      type: object
+      description: External invoice attributes
+      properties:
+        person_id:
+          type: integer
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+        link_type:
+          type: string
+          readOnly: true
+        link_id:
+          type: integer
+          readOnly: true
+        issued_at:
+          type: string
+          format: date
+          readOnly: true
+        year:
+          type: integer
+          readOnly: true
+        abacus_sales_order_key:
+          type: integer
+          readOnly: true
+        state:
+          type: string
+        sent_at:
+          type: string
+          format: date
+        total:
+          type: number
+          format: float
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      additionalProperties: false
+    external_invoices_relationships:
+      type: object
+      properties:
+        person:
+          type: object
+          properties:
+            links:
+              "$ref": "#/components/schemas/jsonapi_relationshipLinks"
+            data:
+              "$ref": "#/components/schemas/jsonapi_relationshipToOne"
+            meta:
+              "$ref": "#/components/schemas/jsonapi_meta"
+      additionalProperties: false
+    external_invoices_resource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '3'
+        type:
+          type: string
+          enum:
+          - external_invoices
+        attributes:
+          "$ref": "#/components/schemas/external_invoices"
+        relationships:
+          "$ref": "#/components/schemas/external_invoices_relationships"
+        links:
+          "$ref": "#/components/schemas/jsonapi_links"
+      additionalProperties: false
+    external_invoices_single:
+      type: object
+      properties:
+        data:
+          "$ref": "#/components/schemas/external_invoices_resource"
+        included:
+          description: To reduce the number of HTTP requests, servers **MAY** allow
+            responses that include related resources along with the requested primary
+            resources. Such responses are called "compound documents".
+          type: array
+          items:
+            "$ref": "#/components/schemas/jsonapi_resource"
+          uniqueItems: true
+        meta:
+          "$ref": "#/components/schemas/jsonapi_meta"
+        links:
+          description: Link members related to the primary data.
+          allOf:
+          - "$ref": "#/components/schemas/jsonapi_links"
+          - "$ref": "#/components/schemas/jsonapi_pagination"
+        jsonapi:
+          "$ref": "#/components/schemas/jsonapi_jsonapi"
+      additionalProperties: false
+    external_invoices_collection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/external_invoices_resource"
+        included:
+          description: To reduce the number of HTTP requests, servers **MAY** allow
+            responses that include related resources along with the requested primary
+            resources. Such responses are called "compound documents".
+          type: array
+          items:
+            "$ref": "#/components/schemas/jsonapi_resource"
+          uniqueItems: true
+        meta:
+          "$ref": "#/components/schemas/jsonapi_meta"
+        links:
+          description: Link members related to the primary data.
+          allOf:
+          - "$ref": "#/components/schemas/jsonapi_links"
+          - "$ref": "#/components/schemas/jsonapi_pagination"
+        jsonapi:
+          "$ref": "#/components/schemas/jsonapi_jsonapi"
+      additionalProperties: false
+    external_invoices_request:
+      type: object
+      properties:
+        data:
+          "$ref": "#/components/schemas/external_invoices_resource"
+    external_invoices_readable_attribute:
+      description: External invoice readable attributes
+      type: string
+      enum:
+      - id
+      - person_id
+      - type
+      - link_type
+      - link_id
+      - issued_at
+      - year
+      - abacus_sales_order_key
+      - state
+      - sent_at
+      - total
+      - created_at
+      - updated_at
+    external_invoices_sortable_attributes_list:
+      description: External invoice sortable attributes
+      type: array
+      items:
+        type: string
+        enum:
+        - id
+        - "-id"
+        - person_id
+        - "-person_id"
+        - type
+        - "-type"
+        - link_type
+        - "-link_type"
+        - link_id
+        - "-link_id"
+        - issued_at
+        - "-issued_at"
+        - year
+        - "-year"
+        - abacus_sales_order_key
+        - "-abacus_sales_order_key"
+        - state
+        - "-state"
+      uniqueItems: true
+    external_invoices_related:
+      description: External invoice relationships available for inclusion
+      type: array
+      items:
+        type: string
+        enum:
+        - person
+      uniqueItems: true
     groups:
       type: object
       description: Group attributes
@@ -1702,6 +1960,12 @@ components:
           readOnly: true
         layer:
           type: boolean
+          readOnly: true
+        parent_id:
+          type: integer
+          readOnly: true
+        layer_group_id:
+          type: integer
           readOnly: true
         type:
           type: string
@@ -1752,18 +2016,6 @@ components:
              This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
             See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
           readOnly: true
-        sac_newsletter_mailing_list_id:
-          type: string
-          description: |2
-             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
-            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
-          readOnly: true
-        course_admin_email:
-          type: string
-          description: |2
-             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
-            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
-          readOnly: true
         foundation_year:
           type: string
           description: |2
@@ -1783,6 +2035,30 @@ components:
             See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
           readOnly: true
         mitglied_termination_by_section_only:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
+        course_admin_email:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
+        sac_newsletter_mailing_list_id:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
+        sac_magazine_mailing_list_id:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
+        sac_fundraising_mailing_list_id:
           type: string
           description: |2
              This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
@@ -1906,7 +2182,7 @@ components:
       properties:
         id:
           type: string
-          example: '12'
+          example: '27'
         type:
           type: string
           enum:
@@ -1977,6 +2253,8 @@ components:
         - display_name
         - description
         - layer
+        - parent_id
+        - layer_group_id
         - type
         - email
         - address
@@ -2008,6 +2286,10 @@ components:
           - "-description"
           - layer
           - "-layer"
+          - parent_id
+          - "-parent_id"
+          - layer_group_id
+          - "-layer_group_id"
           - type
           - "-type"
           - email
@@ -2056,12 +2338,14 @@ components:
       type: string
       enum:
         - logo
-        - sac_newsletter_mailing_list_id
-        - course_admin_email
         - foundation_year
         - section_canton
         - language
         - mitglied_termination_by_section_only
+        - course_admin_email
+        - sac_newsletter_mailing_list_id
+        - sac_magazine_mailing_list_id
+        - sac_fundraising_mailing_list_id
         - has_youth_organization
         - members_count
         - membership_admission_through_gs
@@ -2109,7 +2393,7 @@ components:
       properties:
         id:
           type: string
-          example: '39'
+          example: '67'
         type:
           type: string
           enum:
@@ -2266,7 +2550,7 @@ components:
       properties:
         id:
           type: string
-          example: '20'
+          example: '60'
         type:
           type: string
           enum:
@@ -2380,7 +2664,7 @@ components:
       properties:
         id:
           type: string
-          example: '85'
+          example: '71'
         type:
           type: string
           enum:
@@ -2504,6 +2788,24 @@ components:
         membership_number:
           type: integer
           readOnly: true
+        sac_remark_national_office:
+          type: string
+          readOnly: true
+        sac_remark_section_1:
+          type: string
+          readOnly: true
+        sac_remark_section_2:
+          type: string
+          readOnly: true
+        sac_remark_section_3:
+          type: string
+          readOnly: true
+        sac_remark_section_4:
+          type: string
+          readOnly: true
+        sac_remark_section_5:
+          type: string
+          readOnly: true
         membership_years:
           type: integer
           description: |2
@@ -2574,7 +2876,7 @@ components:
       properties:
         id:
           type: string
-          example: '95'
+          example: '15'
         type:
           type: string
           enum:
@@ -2656,6 +2958,12 @@ components:
         - language
         - family_id
         - membership_number
+        - sac_remark_national_office
+        - sac_remark_section_1
+        - sac_remark_section_2
+        - sac_remark_section_3
+        - sac_remark_section_4
+        - sac_remark_section_5
     people_sortable_attributes_list:
       description: Person sortable attributes
       type: array
@@ -2733,7 +3041,7 @@ components:
       properties:
         id:
           type: string
-          example: '32'
+          example: '9'
         type:
           type: string
           enum:
@@ -2834,18 +3142,6 @@ components:
       type: object
       description: Role attributes
       properties:
-        person_id:
-          type: integer
-          readOnly: true
-        group_id:
-          type: integer
-          readOnly: true
-        label:
-          type: string
-          readOnly: true
-        type:
-          type: string
-          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -2858,6 +3154,14 @@ components:
           type: string
           format: date-time
           readOnly: true
+        person_id:
+          type: integer
+        group_id:
+          type: integer
+        type:
+          type: string
+        label:
+          type: string
       additionalProperties: false
     roles_relationships:
       type: object
@@ -2895,7 +3199,7 @@ components:
       properties:
         id:
           type: string
-          example: '39'
+          example: '57'
         type:
           type: string
           enum:
@@ -2961,13 +3265,13 @@ components:
       type: string
       enum:
         - id
-        - person_id
-        - group_id
-        - label
-        - type
         - created_at
         - updated_at
         - deleted_at
+        - person_id
+        - group_id
+        - type
+        - label
     roles_sortable_attributes_list:
       description: Role sortable attributes
       type: array
@@ -2976,20 +3280,20 @@ components:
         enum:
           - id
           - "-id"
-          - person_id
-          - "-person_id"
-          - group_id
-          - "-group_id"
-          - label
-          - "-label"
-          - type
-          - "-type"
           - created_at
           - "-created_at"
           - updated_at
           - "-updated_at"
           - deleted_at
           - "-deleted_at"
+          - person_id
+          - "-person_id"
+          - group_id
+          - "-group_id"
+          - type
+          - "-type"
+          - label
+          - "-label"
       uniqueItems: true
     roles_related:
       description: Role relationships available for inclusion
@@ -3023,7 +3327,7 @@ components:
       properties:
         id:
           type: string
-          example: '94'
+          example: '34'
         type:
           type: string
           enum:
@@ -3193,6 +3497,7 @@ components:
         - "$ref": "#/components/schemas/event_kinds_resource"
         - "$ref": "#/components/schemas/event_levels_resource"
         - "$ref": "#/components/schemas/events_resource"
+        - "$ref": "#/components/schemas/external_invoices_resource"
         - "$ref": "#/components/schemas/groups_resource"
         - "$ref": "#/components/schemas/invoice_items_resource"
         - "$ref": "#/components/schemas/invoices_resource"
@@ -3263,7 +3568,7 @@ components:
           "$ref": "#/components/schemas/jsonapi_meta"
         id:
           type: string
-          example: '70'
+          example: '2'
       additionalProperties: false
     jsonapi_pagination:
       type: object
@@ -4102,6 +4407,96 @@ components:
       explode: false
       name: filter[state][not_match]
       description: "[Filter Course by state using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][eq]
+      description: "[Filter Course by number using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][not_eq]
+      description: "[Filter Course by number using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][eql]
+      description: "[Filter Course by number using eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_not_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][not_eql]
+      description: "[Filter Course by number using not_eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][prefix]
+      description: "[Filter Course by number using prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_not_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][not_prefix]
+      description: "[Filter Course by number using not_prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][suffix]
+      description: "[Filter Course by number using suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_not_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][not_suffix]
+      description: "[Filter Course by number using not_suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][match]
+      description: "[Filter Course by number using match operator](https://jsonapi.org/format/#fetching-filtering)"
+    courses_filter_number_not_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[number][not_match]
+      description: "[Filter Course by number using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
     courses_filter_language_eq:
       in: query
       schema:
@@ -5883,6 +6278,643 @@ components:
       explode: false
       name: filter[after_or_on][eq]
       description: "[Filter Event by after_or_on using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_id:
+      in: path
+      required: true
+      schema:
+        type: string
+      name: id
+      description: ID of the resource
+    external_invoices_include:
+      in: query
+      schema:
+        "$ref": "#/components/schemas/external_invoices_related"
+      explode: false
+      name: include
+      description: "[Include related resources](https://jsonapi.org/format/#fetching-includes)"
+    external_invoices_fields:
+      in: query
+      schema:
+        description: External invoice readable attributes list
+        type: array
+        items:
+          "$ref": "#/components/schemas/external_invoices_readable_attribute"
+        uniqueItems: true
+      explode: false
+      name: fields[external_invoices]
+      description: "[Include only specified fields of External invoice in response](https://jsonapi.org/format/#fetching-sparse-fieldsets)"
+    external_invoices_sort:
+      in: query
+      schema:
+        "$ref": "#/components/schemas/external_invoices_sortable_attributes_list"
+      explode: false
+      name: sort
+      description: |+
+        [Sort external_invoices according to one or more criteria](https://jsonapi.org/format/#fetching-sorting)
+
+        You should not include both ascending `id` and descending `-id` fields the same time
+
+    external_invoices_filter_id_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[id][eq]
+      description: "[Filter External invoice by id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_id_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[id][not_eq]
+      description: "[Filter External invoice by id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_id_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[id][gt]
+      description: "[Filter External invoice by id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_id_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[id][gte]
+      description: "[Filter External invoice by id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_id_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[id][lt]
+      description: "[Filter External invoice by id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_id_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[id][lte]
+      description: "[Filter External invoice by id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_person_id_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][eq]
+      description: "[Filter External invoice by person_id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_person_id_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][not_eq]
+      description: "[Filter External invoice by person_id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_person_id_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][gt]
+      description: "[Filter External invoice by person_id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_person_id_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][gte]
+      description: "[Filter External invoice by person_id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_person_id_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][lt]
+      description: "[Filter External invoice by person_id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_person_id_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][lte]
+      description: "[Filter External invoice by person_id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][eq]
+      description: "[Filter External invoice by type using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_eq]
+      description: "[Filter External invoice by type using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][eql]
+      description: "[Filter External invoice by type using eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_not_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_eql]
+      description: "[Filter External invoice by type using not_eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][prefix]
+      description: "[Filter External invoice by type using prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_not_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_prefix]
+      description: "[Filter External invoice by type using not_prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][suffix]
+      description: "[Filter External invoice by type using suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_not_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_suffix]
+      description: "[Filter External invoice by type using not_suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][match]
+      description: "[Filter External invoice by type using match operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_type_not_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_match]
+      description: "[Filter External invoice by type using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][eq]
+      description: "[Filter External invoice by link_type using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][not_eq]
+      description: "[Filter External invoice by link_type using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][eql]
+      description: "[Filter External invoice by link_type using eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_not_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][not_eql]
+      description: "[Filter External invoice by link_type using not_eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][prefix]
+      description: "[Filter External invoice by link_type using prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_not_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][not_prefix]
+      description: "[Filter External invoice by link_type using not_prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][suffix]
+      description: "[Filter External invoice by link_type using suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_not_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][not_suffix]
+      description: "[Filter External invoice by link_type using not_suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][match]
+      description: "[Filter External invoice by link_type using match operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_type_not_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[link_type][not_match]
+      description: "[Filter External invoice by link_type using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_id_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[link_id][eq]
+      description: "[Filter External invoice by link_id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_id_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[link_id][not_eq]
+      description: "[Filter External invoice by link_id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_id_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[link_id][gt]
+      description: "[Filter External invoice by link_id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_id_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[link_id][gte]
+      description: "[Filter External invoice by link_id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_id_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[link_id][lt]
+      description: "[Filter External invoice by link_id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_link_id_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[link_id][lte]
+      description: "[Filter External invoice by link_id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_issued_at_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          format: date
+      explode: false
+      name: filter[issued_at][eq]
+      description: "[Filter External invoice by issued_at using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_issued_at_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          format: date
+      explode: false
+      name: filter[issued_at][not_eq]
+      description: "[Filter External invoice by issued_at using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_issued_at_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          format: date
+      explode: false
+      name: filter[issued_at][gt]
+      description: "[Filter External invoice by issued_at using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_issued_at_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          format: date
+      explode: false
+      name: filter[issued_at][gte]
+      description: "[Filter External invoice by issued_at using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_issued_at_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          format: date
+      explode: false
+      name: filter[issued_at][lt]
+      description: "[Filter External invoice by issued_at using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_issued_at_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          format: date
+      explode: false
+      name: filter[issued_at][lte]
+      description: "[Filter External invoice by issued_at using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_year_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[year][eq]
+      description: "[Filter External invoice by year using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_year_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[year][not_eq]
+      description: "[Filter External invoice by year using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_year_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[year][gt]
+      description: "[Filter External invoice by year using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_year_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[year][gte]
+      description: "[Filter External invoice by year using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_year_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[year][lt]
+      description: "[Filter External invoice by year using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_year_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[year][lte]
+      description: "[Filter External invoice by year using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_abacus_sales_order_key_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[abacus_sales_order_key][eq]
+      description: "[Filter External invoice by abacus_sales_order_key using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_abacus_sales_order_key_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[abacus_sales_order_key][not_eq]
+      description: "[Filter External invoice by abacus_sales_order_key using not_eq
+        operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_abacus_sales_order_key_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[abacus_sales_order_key][gt]
+      description: "[Filter External invoice by abacus_sales_order_key using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_abacus_sales_order_key_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[abacus_sales_order_key][gte]
+      description: "[Filter External invoice by abacus_sales_order_key using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_abacus_sales_order_key_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[abacus_sales_order_key][lt]
+      description: "[Filter External invoice by abacus_sales_order_key using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_abacus_sales_order_key_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[abacus_sales_order_key][lte]
+      description: "[Filter External invoice by abacus_sales_order_key using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][eq]
+      description: "[Filter External invoice by state using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][not_eq]
+      description: "[Filter External invoice by state using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][eql]
+      description: "[Filter External invoice by state using eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_not_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][not_eql]
+      description: "[Filter External invoice by state using not_eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][prefix]
+      description: "[Filter External invoice by state using prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_not_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][not_prefix]
+      description: "[Filter External invoice by state using not_prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][suffix]
+      description: "[Filter External invoice by state using suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_not_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][not_suffix]
+      description: "[Filter External invoice by state using not_suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][match]
+      description: "[Filter External invoice by state using match operator](https://jsonapi.org/format/#fetching-filtering)"
+    external_invoices_filter_state_not_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[state][not_match]
+      description: "[Filter External invoice by state using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
     groups_id:
       in: path
       required: true
@@ -6351,6 +7383,114 @@ components:
       explode: false
       name: filter[layer][eq]
       description: "[Filter Group by layer using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_parent_id_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[parent_id][eq]
+      description: "[Filter Group by parent_id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_parent_id_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[parent_id][not_eq]
+      description: "[Filter Group by parent_id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_parent_id_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[parent_id][gt]
+      description: "[Filter Group by parent_id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_parent_id_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[parent_id][gte]
+      description: "[Filter Group by parent_id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_parent_id_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[parent_id][lt]
+      description: "[Filter Group by parent_id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_parent_id_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[parent_id][lte]
+      description: "[Filter Group by parent_id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_layer_group_id_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[layer_group_id][eq]
+      description: "[Filter Group by layer_group_id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_layer_group_id_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[layer_group_id][not_eq]
+      description: "[Filter Group by layer_group_id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_layer_group_id_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[layer_group_id][gt]
+      description: "[Filter Group by layer_group_id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_layer_group_id_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[layer_group_id][gte]
+      description: "[Filter Group by layer_group_id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_layer_group_id_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[layer_group_id][lt]
+      description: "[Filter Group by layer_group_id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_layer_group_id_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[layer_group_id][lte]
+      description: "[Filter Group by layer_group_id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
     groups_filter_type_eq:
       in: query
       schema:
@@ -8966,60 +10106,6 @@ components:
       explode: false
       name: filter[updated_at][lte]
       description: "[Filter Person by updated_at using lte operator](https://jsonapi.org/format/#fetching-filtering)"
-    people_filter_membership_number_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[membership_number][eq]
-      description: "[Filter Person by membership_number using eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    people_filter_membership_number_not_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[membership_number][not_eq]
-      description: "[Filter Person by membership_number using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    people_filter_membership_number_gt:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[membership_number][gt]
-      description: "[Filter Person by membership_number using gt operator](https://jsonapi.org/format/#fetching-filtering)"
-    people_filter_membership_number_gte:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[membership_number][gte]
-      description: "[Filter Person by membership_number using gte operator](https://jsonapi.org/format/#fetching-filtering)"
-    people_filter_membership_number_lt:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[membership_number][lt]
-      description: "[Filter Person by membership_number using lt operator](https://jsonapi.org/format/#fetching-filtering)"
-    people_filter_membership_number_lte:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[membership_number][lte]
-      description: "[Filter Person by membership_number using lte operator](https://jsonapi.org/format/#fetching-filtering)"
     phone_numbers_id:
       in: path
       required: true
@@ -9524,294 +10610,6 @@ components:
       explode: false
       name: filter[id][lte]
       description: "[Filter Role by id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_person_id_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[person_id][eq]
-      description: "[Filter Role by person_id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_person_id_not_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[person_id][not_eq]
-      description: "[Filter Role by person_id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_person_id_gt:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[person_id][gt]
-      description: "[Filter Role by person_id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_person_id_gte:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[person_id][gte]
-      description: "[Filter Role by person_id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_person_id_lt:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[person_id][lt]
-      description: "[Filter Role by person_id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_person_id_lte:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[person_id][lte]
-      description: "[Filter Role by person_id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_group_id_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[group_id][eq]
-      description: "[Filter Role by group_id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_group_id_not_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[group_id][not_eq]
-      description: "[Filter Role by group_id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_group_id_gt:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[group_id][gt]
-      description: "[Filter Role by group_id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_group_id_gte:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[group_id][gte]
-      description: "[Filter Role by group_id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_group_id_lt:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[group_id][lt]
-      description: "[Filter Role by group_id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_group_id_lte:
-      in: query
-      schema:
-        type: array
-        items:
-          type: integer
-      explode: false
-      name: filter[group_id][lte]
-      description: "[Filter Role by group_id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][eq]
-      description: "[Filter Role by label using eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_not_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][not_eq]
-      description: "[Filter Role by label using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_eql:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][eql]
-      description: "[Filter Role by label using eql operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_not_eql:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][not_eql]
-      description: "[Filter Role by label using not_eql operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_prefix:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][prefix]
-      description: "[Filter Role by label using prefix operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_not_prefix:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][not_prefix]
-      description: "[Filter Role by label using not_prefix operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_suffix:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][suffix]
-      description: "[Filter Role by label using suffix operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_not_suffix:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][not_suffix]
-      description: "[Filter Role by label using not_suffix operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_match:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][match]
-      description: "[Filter Role by label using match operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_label_not_match:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[label][not_match]
-      description: "[Filter Role by label using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][eq]
-      description: "[Filter Role by type using eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_not_eq:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][not_eq]
-      description: "[Filter Role by type using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_eql:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][eql]
-      description: "[Filter Role by type using eql operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_not_eql:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][not_eql]
-      description: "[Filter Role by type using not_eql operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_prefix:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][prefix]
-      description: "[Filter Role by type using prefix operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_not_prefix:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][not_prefix]
-      description: "[Filter Role by type using not_prefix operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_suffix:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][suffix]
-      description: "[Filter Role by type using suffix operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_not_suffix:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][not_suffix]
-      description: "[Filter Role by type using not_suffix operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_match:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][match]
-      description: "[Filter Role by type using match operator](https://jsonapi.org/format/#fetching-filtering)"
-    roles_filter_type_not_match:
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      explode: false
-      name: filter[type][not_match]
-      description: "[Filter Role by type using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
     roles_filter_created_at_eq:
       in: query
       schema:
@@ -9992,6 +10790,294 @@ components:
       explode: false
       name: filter[deleted_at][lte]
       description: "[Filter Role by deleted_at using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_person_id_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][eq]
+      description: "[Filter Role by person_id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_person_id_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][not_eq]
+      description: "[Filter Role by person_id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_person_id_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][gt]
+      description: "[Filter Role by person_id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_person_id_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][gte]
+      description: "[Filter Role by person_id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_person_id_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][lt]
+      description: "[Filter Role by person_id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_person_id_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[person_id][lte]
+      description: "[Filter Role by person_id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_group_id_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[group_id][eq]
+      description: "[Filter Role by group_id using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_group_id_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[group_id][not_eq]
+      description: "[Filter Role by group_id using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_group_id_gt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[group_id][gt]
+      description: "[Filter Role by group_id using gt operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_group_id_gte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[group_id][gte]
+      description: "[Filter Role by group_id using gte operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_group_id_lt:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[group_id][lt]
+      description: "[Filter Role by group_id using lt operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_group_id_lte:
+      in: query
+      schema:
+        type: array
+        items:
+          type: integer
+      explode: false
+      name: filter[group_id][lte]
+      description: "[Filter Role by group_id using lte operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][eq]
+      description: "[Filter Role by type using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_eq]
+      description: "[Filter Role by type using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][eql]
+      description: "[Filter Role by type using eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_not_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_eql]
+      description: "[Filter Role by type using not_eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][prefix]
+      description: "[Filter Role by type using prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_not_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_prefix]
+      description: "[Filter Role by type using not_prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][suffix]
+      description: "[Filter Role by type using suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_not_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_suffix]
+      description: "[Filter Role by type using not_suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][match]
+      description: "[Filter Role by type using match operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_type_not_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[type][not_match]
+      description: "[Filter Role by type using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][eq]
+      description: "[Filter Role by label using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_not_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][not_eq]
+      description: "[Filter Role by label using not_eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][eql]
+      description: "[Filter Role by label using eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_not_eql:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][not_eql]
+      description: "[Filter Role by label using not_eql operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][prefix]
+      description: "[Filter Role by label using prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_not_prefix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][not_prefix]
+      description: "[Filter Role by label using not_prefix operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][suffix]
+      description: "[Filter Role by label using suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_not_suffix:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][not_suffix]
+      description: "[Filter Role by label using not_suffix operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][match]
+      description: "[Filter Role by label using match operator](https://jsonapi.org/format/#fetching-filtering)"
+    roles_filter_label_not_match:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[label][not_match]
+      description: "[Filter Role by label using not_match operator](https://jsonapi.org/format/#fetching-filtering)"
     social_accounts_id:
       in: path
       required: true
@@ -10449,6 +11535,12 @@ components:
         application/vnd.api+json:
           schema:
             "$ref": "#/components/schemas/events_request"
+    external_invoices:
+      required: true
+      content:
+        application/vnd.api+json:
+          schema:
+            "$ref": "#/components/schemas/external_invoices_request"
     groups:
       required: true
       content:
@@ -10582,6 +11674,18 @@ components:
       operationId: deleteEvent
       parameters:
         id: "$response.body#/data/id"
+    getExternalInvoiceId:
+      operationId: getExternalInvoice
+      parameters:
+        id: "$response.body#/data/id"
+    updateExternalInvoiceId:
+      operationId: updateExternalInvoice
+      parameters:
+        id: "$response.body#/data/id"
+    deleteExternalInvoiceId:
+      operationId: deleteExternalInvoice
+      parameters:
+        id: "$response.body#/data/id"
     getGroupId:
       operationId: getGroup
       parameters:
@@ -10696,6 +11800,8 @@ tags:
     description: Level operations
   - name: events
     description: Event operations
+  - name: external_invoices
+    description: External invoice operations
   - name: groups
     description: Group operations
   - name: invoice_items
@@ -10929,6 +12035,199 @@ paths:
           "$ref": "#/components/responses/403"
         '404':
           "$ref": "#/components/responses/404"
+  "/api/external_invoices":
+    parameters:
+      - "$ref": "#/components/parameters/external_invoices_include"
+      - "$ref": "#/components/parameters/external_invoices_sort"
+      - "$ref": "#/components/parameters/external_invoices_fields"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_match"
+      - "$ref": "#/components/parameters/people_fields"
+    get:
+      operationId: listExternalInvoices
+      summary: List External invoices
+      tags:
+      - external_invoices
+      responses:
+        '200':
+          "$ref": "#/components/responses/external_invoices_200_collection"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+  "/api/external_invoices/{id}":
+    parameters:
+      - "$ref": "#/components/parameters/external_invoices_id"
+      - "$ref": "#/components/parameters/external_invoices_include"
+      - "$ref": "#/components/parameters/external_invoices_sort"
+      - "$ref": "#/components/parameters/external_invoices_fields"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_id_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_person_id_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_type_not_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_type_not_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_link_id_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_issued_at_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_year_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_gt"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_gte"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_lt"
+      - "$ref": "#/components/parameters/external_invoices_filter_abacus_sales_order_key_lte"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_eq"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_eql"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_prefix"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_suffix"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_match"
+      - "$ref": "#/components/parameters/external_invoices_filter_state_not_match"
+      - "$ref": "#/components/parameters/people_fields"
+    get:
+      operationId: getExternalInvoice
+      summary: Fetch External invoice
+      tags:
+      - external_invoices
+      responses:
+        '200':
+          "$ref": "#/components/responses/external_invoices_200"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+    put:
+      operationId: updateExternalInvoice
+      summary: Update External invoice
+      tags:
+      - external_invoices
+      responses:
+        '200':
+          "$ref": "#/components/responses/external_invoices_200"
+        '202':
+          "$ref": "#/components/responses/202"
+        '204':
+          "$ref": "#/components/responses/204"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/409"
+        '404':
+          "$ref": "#/components/responses/404"
+        '422':
+          "$ref": "#/components/responses/422"
+      requestBody:
+        "$ref": "#/components/requestBodies/external_invoices"
   "/api/groups":
     parameters:
       - "$ref": "#/components/parameters/groups_include"
@@ -10982,6 +12281,18 @@ paths:
       - "$ref": "#/components/parameters/groups_filter_description_match"
       - "$ref": "#/components/parameters/groups_filter_description_not_match"
       - "$ref": "#/components/parameters/groups_filter_layer_eq"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_eq"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_not_eq"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_gt"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_gte"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_lt"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_lte"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_eq"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_not_eq"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_gt"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_gte"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_lt"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_lte"
       - "$ref": "#/components/parameters/groups_filter_type_eq"
       - "$ref": "#/components/parameters/groups_filter_type_not_eq"
       - "$ref": "#/components/parameters/groups_filter_type_eql"
@@ -11085,12 +12396,6 @@ paths:
       - "$ref": "#/components/parameters/phone_numbers_fields"
       - "$ref": "#/components/parameters/social_accounts_fields"
       - "$ref": "#/components/parameters/additional_emails_fields"
-      - in: query
-        name: page[size]
-        required: false
-        schema:
-          type: integer
-          minimum: 1
     get:
       operationId: listGroups
       summary: List Groups
@@ -11157,6 +12462,18 @@ paths:
       - "$ref": "#/components/parameters/groups_filter_description_match"
       - "$ref": "#/components/parameters/groups_filter_description_not_match"
       - "$ref": "#/components/parameters/groups_filter_layer_eq"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_eq"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_not_eq"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_gt"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_gte"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_lt"
+      - "$ref": "#/components/parameters/groups_filter_parent_id_lte"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_eq"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_not_eq"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_gt"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_gte"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_lt"
+      - "$ref": "#/components/parameters/groups_filter_layer_group_id_lte"
       - "$ref": "#/components/parameters/groups_filter_type_eq"
       - "$ref": "#/components/parameters/groups_filter_type_not_eq"
       - "$ref": "#/components/parameters/groups_filter_type_eql"
@@ -11516,12 +12833,6 @@ paths:
       - "$ref": "#/components/parameters/people_filter_updated_at_gte"
       - "$ref": "#/components/parameters/people_filter_updated_at_lt"
       - "$ref": "#/components/parameters/people_filter_updated_at_lte"
-      - "$ref": "#/components/parameters/people_filter_membership_number_eq"
-      - "$ref": "#/components/parameters/people_filter_membership_number_not_eq"
-      - "$ref": "#/components/parameters/people_filter_membership_number_gt"
-      - "$ref": "#/components/parameters/people_filter_membership_number_gte"
-      - "$ref": "#/components/parameters/people_filter_membership_number_lt"
-      - "$ref": "#/components/parameters/people_filter_membership_number_lte"
       - "$ref": "#/components/parameters/groups_fields"
       - "$ref": "#/components/parameters/roles_fields"
       - "$ref": "#/components/parameters/phone_numbers_fields"
@@ -11681,12 +12992,6 @@ paths:
       - "$ref": "#/components/parameters/people_filter_updated_at_gte"
       - "$ref": "#/components/parameters/people_filter_updated_at_lt"
       - "$ref": "#/components/parameters/people_filter_updated_at_lte"
-      - "$ref": "#/components/parameters/people_filter_membership_number_eq"
-      - "$ref": "#/components/parameters/people_filter_membership_number_not_eq"
-      - "$ref": "#/components/parameters/people_filter_membership_number_gt"
-      - "$ref": "#/components/parameters/people_filter_membership_number_gte"
-      - "$ref": "#/components/parameters/people_filter_membership_number_lt"
-      - "$ref": "#/components/parameters/people_filter_membership_number_lte"
       - "$ref": "#/components/parameters/groups_fields"
       - "$ref": "#/components/parameters/roles_fields"
       - "$ref": "#/components/parameters/phone_numbers_fields"
@@ -11728,3 +13033,216 @@ paths:
           "$ref": "#/components/responses/422"
       requestBody:
         "$ref": "#/components/requestBodies/people"
+  "/api/roles":
+    parameters:
+      - "$ref": "#/components/parameters/roles_include"
+      - "$ref": "#/components/parameters/roles_sort"
+      - "$ref": "#/components/parameters/roles_fields"
+      - "$ref": "#/components/parameters/roles_filter_id_eq"
+      - "$ref": "#/components/parameters/roles_filter_id_not_eq"
+      - "$ref": "#/components/parameters/roles_filter_id_gt"
+      - "$ref": "#/components/parameters/roles_filter_id_gte"
+      - "$ref": "#/components/parameters/roles_filter_id_lt"
+      - "$ref": "#/components/parameters/roles_filter_id_lte"
+      - "$ref": "#/components/parameters/roles_filter_created_at_eq"
+      - "$ref": "#/components/parameters/roles_filter_created_at_not_eq"
+      - "$ref": "#/components/parameters/roles_filter_created_at_gt"
+      - "$ref": "#/components/parameters/roles_filter_created_at_gte"
+      - "$ref": "#/components/parameters/roles_filter_created_at_lt"
+      - "$ref": "#/components/parameters/roles_filter_created_at_lte"
+      - "$ref": "#/components/parameters/roles_filter_updated_at_eq"
+      - "$ref": "#/components/parameters/roles_filter_updated_at_not_eq"
+      - "$ref": "#/components/parameters/roles_filter_updated_at_gt"
+      - "$ref": "#/components/parameters/roles_filter_updated_at_gte"
+      - "$ref": "#/components/parameters/roles_filter_updated_at_lt"
+      - "$ref": "#/components/parameters/roles_filter_updated_at_lte"
+      - "$ref": "#/components/parameters/roles_filter_deleted_at_eq"
+      - "$ref": "#/components/parameters/roles_filter_deleted_at_not_eq"
+      - "$ref": "#/components/parameters/roles_filter_deleted_at_gt"
+      - "$ref": "#/components/parameters/roles_filter_deleted_at_gte"
+      - "$ref": "#/components/parameters/roles_filter_deleted_at_lt"
+      - "$ref": "#/components/parameters/roles_filter_deleted_at_lte"
+      - "$ref": "#/components/parameters/roles_filter_person_id_eq"
+      - "$ref": "#/components/parameters/roles_filter_person_id_not_eq"
+      - "$ref": "#/components/parameters/roles_filter_person_id_gt"
+      - "$ref": "#/components/parameters/roles_filter_person_id_gte"
+      - "$ref": "#/components/parameters/roles_filter_person_id_lt"
+      - "$ref": "#/components/parameters/roles_filter_person_id_lte"
+      - "$ref": "#/components/parameters/roles_filter_group_id_eq"
+      - "$ref": "#/components/parameters/roles_filter_group_id_not_eq"
+      - "$ref": "#/components/parameters/roles_filter_group_id_gt"
+      - "$ref": "#/components/parameters/roles_filter_group_id_gte"
+      - "$ref": "#/components/parameters/roles_filter_group_id_lt"
+      - "$ref": "#/components/parameters/roles_filter_group_id_lte"
+      - "$ref": "#/components/parameters/roles_filter_type_eq"
+      - "$ref": "#/components/parameters/roles_filter_type_not_eq"
+      - "$ref": "#/components/parameters/roles_filter_type_eql"
+      - "$ref": "#/components/parameters/roles_filter_type_not_eql"
+      - "$ref": "#/components/parameters/roles_filter_type_prefix"
+      - "$ref": "#/components/parameters/roles_filter_type_not_prefix"
+      - "$ref": "#/components/parameters/roles_filter_type_suffix"
+      - "$ref": "#/components/parameters/roles_filter_type_not_suffix"
+      - "$ref": "#/components/parameters/roles_filter_type_match"
+      - "$ref": "#/components/parameters/roles_filter_type_not_match"
+      - "$ref": "#/components/parameters/roles_filter_label_eq"
+      - "$ref": "#/components/parameters/roles_filter_label_not_eq"
+      - "$ref": "#/components/parameters/roles_filter_label_eql"
+      - "$ref": "#/components/parameters/roles_filter_label_not_eql"
+      - "$ref": "#/components/parameters/roles_filter_label_prefix"
+      - "$ref": "#/components/parameters/roles_filter_label_not_prefix"
+      - "$ref": "#/components/parameters/roles_filter_label_suffix"
+      - "$ref": "#/components/parameters/roles_filter_label_not_suffix"
+      - "$ref": "#/components/parameters/roles_filter_label_match"
+      - "$ref": "#/components/parameters/roles_filter_label_not_match"
+      - "$ref": "#/components/parameters/people_fields"
+      - "$ref": "#/components/parameters/groups_fields"
+    get:
+      operationId: listRoles
+      summary: List Roles
+      tags:
+      - roles
+      responses:
+        '200':
+          "$ref": "#/components/responses/roles_200_collection"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+    post:
+      operationId: createRole
+      summary: Create Role
+      tags:
+      - roles
+      responses:
+        '201':
+          "$ref": "#/components/responses/roles_201"
+        '202':
+          "$ref": "#/components/responses/202"
+        '204':
+          "$ref": "#/components/responses/204"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/409"
+        '422':
+          "$ref": "#/components/responses/422"
+      requestBody:
+        "$ref": "#/components/requestBodies/roles"
+  "/api/roles/{id}":
+    parameters:
+    - "$ref": "#/components/parameters/roles_id"
+    - "$ref": "#/components/parameters/roles_include"
+    - "$ref": "#/components/parameters/roles_sort"
+    - "$ref": "#/components/parameters/roles_fields"
+    - "$ref": "#/components/parameters/roles_filter_id_eq"
+    - "$ref": "#/components/parameters/roles_filter_id_not_eq"
+    - "$ref": "#/components/parameters/roles_filter_id_gt"
+    - "$ref": "#/components/parameters/roles_filter_id_gte"
+    - "$ref": "#/components/parameters/roles_filter_id_lt"
+    - "$ref": "#/components/parameters/roles_filter_id_lte"
+    - "$ref": "#/components/parameters/roles_filter_created_at_eq"
+    - "$ref": "#/components/parameters/roles_filter_created_at_not_eq"
+    - "$ref": "#/components/parameters/roles_filter_created_at_gt"
+    - "$ref": "#/components/parameters/roles_filter_created_at_gte"
+    - "$ref": "#/components/parameters/roles_filter_created_at_lt"
+    - "$ref": "#/components/parameters/roles_filter_created_at_lte"
+    - "$ref": "#/components/parameters/roles_filter_updated_at_eq"
+    - "$ref": "#/components/parameters/roles_filter_updated_at_not_eq"
+    - "$ref": "#/components/parameters/roles_filter_updated_at_gt"
+    - "$ref": "#/components/parameters/roles_filter_updated_at_gte"
+    - "$ref": "#/components/parameters/roles_filter_updated_at_lt"
+    - "$ref": "#/components/parameters/roles_filter_updated_at_lte"
+    - "$ref": "#/components/parameters/roles_filter_deleted_at_eq"
+    - "$ref": "#/components/parameters/roles_filter_deleted_at_not_eq"
+    - "$ref": "#/components/parameters/roles_filter_deleted_at_gt"
+    - "$ref": "#/components/parameters/roles_filter_deleted_at_gte"
+    - "$ref": "#/components/parameters/roles_filter_deleted_at_lt"
+    - "$ref": "#/components/parameters/roles_filter_deleted_at_lte"
+    - "$ref": "#/components/parameters/roles_filter_person_id_eq"
+    - "$ref": "#/components/parameters/roles_filter_person_id_not_eq"
+    - "$ref": "#/components/parameters/roles_filter_person_id_gt"
+    - "$ref": "#/components/parameters/roles_filter_person_id_gte"
+    - "$ref": "#/components/parameters/roles_filter_person_id_lt"
+    - "$ref": "#/components/parameters/roles_filter_person_id_lte"
+    - "$ref": "#/components/parameters/roles_filter_group_id_eq"
+    - "$ref": "#/components/parameters/roles_filter_group_id_not_eq"
+    - "$ref": "#/components/parameters/roles_filter_group_id_gt"
+    - "$ref": "#/components/parameters/roles_filter_group_id_gte"
+    - "$ref": "#/components/parameters/roles_filter_group_id_lt"
+    - "$ref": "#/components/parameters/roles_filter_group_id_lte"
+    - "$ref": "#/components/parameters/roles_filter_type_eq"
+    - "$ref": "#/components/parameters/roles_filter_type_not_eq"
+    - "$ref": "#/components/parameters/roles_filter_type_eql"
+    - "$ref": "#/components/parameters/roles_filter_type_not_eql"
+    - "$ref": "#/components/parameters/roles_filter_type_prefix"
+    - "$ref": "#/components/parameters/roles_filter_type_not_prefix"
+    - "$ref": "#/components/parameters/roles_filter_type_suffix"
+    - "$ref": "#/components/parameters/roles_filter_type_not_suffix"
+    - "$ref": "#/components/parameters/roles_filter_type_match"
+    - "$ref": "#/components/parameters/roles_filter_type_not_match"
+    - "$ref": "#/components/parameters/roles_filter_label_eq"
+    - "$ref": "#/components/parameters/roles_filter_label_not_eq"
+    - "$ref": "#/components/parameters/roles_filter_label_eql"
+    - "$ref": "#/components/parameters/roles_filter_label_not_eql"
+    - "$ref": "#/components/parameters/roles_filter_label_prefix"
+    - "$ref": "#/components/parameters/roles_filter_label_not_prefix"
+    - "$ref": "#/components/parameters/roles_filter_label_suffix"
+    - "$ref": "#/components/parameters/roles_filter_label_not_suffix"
+    - "$ref": "#/components/parameters/roles_filter_label_match"
+    - "$ref": "#/components/parameters/roles_filter_label_not_match"
+    - "$ref": "#/components/parameters/people_fields"
+    - "$ref": "#/components/parameters/groups_fields"
+    get:
+      operationId: getRole
+      summary: Fetch Role
+      tags:
+      - roles
+      responses:
+        '200':
+          "$ref": "#/components/responses/roles_200"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+    put:
+      operationId: updateRole
+      summary: Update Role
+      tags:
+      - roles
+      responses:
+        '200':
+          "$ref": "#/components/responses/roles_200"
+        '202':
+          "$ref": "#/components/responses/202"
+        '204':
+          "$ref": "#/components/responses/204"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/409"
+        '404':
+          "$ref": "#/components/responses/404"
+        '422':
+          "$ref": "#/components/responses/422"
+      requestBody:
+        "$ref": "#/components/requestBodies/roles"
+    delete:
+      operationId: deleteRole
+      summary: Destroy Role
+      tags:
+      - roles
+      responses:
+        '200':
+          "$ref": "#/components/responses/200"
+        '202':
+          "$ref": "#/components/responses/202"
+        '204':
+          "$ref": "#/components/responses/204"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"

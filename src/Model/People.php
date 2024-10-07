@@ -106,6 +106,42 @@ class People extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getSacRemarkNationalOffice(): ?string
+	{
+		return $this->getAttribute('sac_remark_national_office');
+	}
+
+
+	public function getSacRemarkSection1(): ?string
+	{
+		return $this->getAttribute('sac_remark_section_1');
+	}
+
+
+	public function getSacRemarkSection2(): ?string
+	{
+		return $this->getAttribute('sac_remark_section_2');
+	}
+
+
+	public function getSacRemarkSection3(): ?string
+	{
+		return $this->getAttribute('sac_remark_section_3');
+	}
+
+
+	public function getSacRemarkSection4(): ?string
+	{
+		return $this->getAttribute('sac_remark_section_4');
+	}
+
+
+	public function getSacRemarkSection5(): ?string
+	{
+		return $this->getAttribute('sac_remark_section_5');
+	}
+
+
 	public function getMembershipYears(): ?int
 	{
 		return $this->getAttribute('membership_years');
