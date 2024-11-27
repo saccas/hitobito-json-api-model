@@ -257,9 +257,9 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 
 
 	/**
-	 * @return ?\Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Dates>
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Dates>
 	 */
-	public function getDates(): ?\Illuminate\Support\Collection
+	public function getDates(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('dates', \Saccas\HitobitoApi\Model\Dates::class);
 	}
@@ -272,9 +272,9 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 
 
 	/**
-	 * @return ?\Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\People>
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\People>
 	 */
-	public function getLeaders(): ?\Illuminate\Support\Collection
+	public function getLeaders(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('leaders', \Saccas\HitobitoApi\Model\People::class);
 	}

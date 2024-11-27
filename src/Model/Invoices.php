@@ -89,9 +89,9 @@ class Invoices extends \Saccas\JsonApiModel\JsonApiModel
 
 
 	/**
-	 * @return ?\Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\InvoiceItems>
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\InvoiceItems>
 	 */
-	public function getInvoiceItems(): ?\Illuminate\Support\Collection
+	public function getInvoiceItems(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('invoice_items', \Saccas\HitobitoApi\Model\InvoiceItems::class);
 	}
