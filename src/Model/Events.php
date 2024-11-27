@@ -113,9 +113,9 @@ class Events extends \Saccas\JsonApiModel\JsonApiModel
 
 
 	/**
-	 * @return ?\Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Dates>
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Dates>
 	 */
-	public function getDates(): ?\Illuminate\Support\Collection
+	public function getDates(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('dates', \Saccas\HitobitoApi\Model\Dates::class);
 	}

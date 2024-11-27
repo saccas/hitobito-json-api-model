@@ -161,36 +161,36 @@ class People extends \Saccas\JsonApiModel\JsonApiModel
 
 
 	/**
-	 * @return ?\Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Roles>
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Roles>
 	 */
-	public function getRoles(): ?\Illuminate\Support\Collection
+	public function getRoles(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('roles', \Saccas\HitobitoApi\Model\Roles::class);
 	}
 
 
 	/**
-	 * @return ?\Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\PhoneNumbers>
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\PhoneNumbers>
 	 */
-	public function getPhoneNumbers(): ?\Illuminate\Support\Collection
+	public function getPhoneNumbers(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('phone_numbers', \Saccas\HitobitoApi\Model\PhoneNumbers::class);
 	}
 
 
 	/**
-	 * @return ?\Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\SocialAccounts>
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\SocialAccounts>
 	 */
-	public function getSocialAccounts(): ?\Illuminate\Support\Collection
+	public function getSocialAccounts(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('social_accounts', \Saccas\HitobitoApi\Model\SocialAccounts::class);
 	}
 
 
 	/**
-	 * @return ?\Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\AdditionalEmails>
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\AdditionalEmails>
 	 */
-	public function getAdditionalEmails(): ?\Illuminate\Support\Collection
+	public function getAdditionalEmails(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('additional_emails', \Saccas\HitobitoApi\Model\AdditionalEmails::class);
 	}
