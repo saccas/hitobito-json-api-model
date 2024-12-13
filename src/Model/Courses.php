@@ -256,18 +256,18 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getKind(): ?EventKinds
+	{
+		return $this->getRelationSingle('kind', \Saccas\HitobitoApi\Model\EventKinds::class);
+	}
+
+
 	/**
 	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Dates>
 	 */
 	public function getDates(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('dates', \Saccas\HitobitoApi\Model\Dates::class);
-	}
-
-
-	public function getKind(): ?EventKinds
-	{
-		return $this->getRelationSingle('kind', \Saccas\HitobitoApi\Model\EventKinds::class);
 	}
 
 

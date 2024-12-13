@@ -112,6 +112,12 @@ class Events extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getKind(): ?Kind
+	{
+		return $this->getRelationSingle('kind', \Saccas\HitobitoApi\Model\Kind::class);
+	}
+
+
 	/**
 	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Dates>
 	 */
