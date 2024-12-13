@@ -22,9 +22,15 @@ class Roles extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getDeletedAt(): ?\DateTime
+	public function getStartOn(): ?\DateTime
 	{
-		return $this->getDateAttribute('deleted_at');
+		return $this->getDateAttribute('start_on');
+	}
+
+
+	public function getEndOn(): ?\DateTime
+	{
+		return $this->getDateAttribute('end_on');
 	}
 
 
@@ -49,6 +55,12 @@ class Roles extends \Saccas\JsonApiModel\JsonApiModel
 	public function getLabel(): ?string
 	{
 		return $this->getAttribute('label');
+	}
+
+
+	public function getMembershipYears(): ?int
+	{
+		return $this->getAttribute('membership_years');
 	}
 
 

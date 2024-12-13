@@ -136,30 +136,6 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getFoundationYear(): ?string
-	{
-		return $this->getAttribute('foundation_year');
-	}
-
-
-	public function getSectionCanton(): ?string
-	{
-		return $this->getAttribute('section_canton');
-	}
-
-
-	public function getLanguage(): ?string
-	{
-		return $this->getAttribute('language');
-	}
-
-
-	public function getMitgliedTerminationBySectionOnly(): ?string
-	{
-		return $this->getAttribute('mitglied_termination_by_section_only');
-	}
-
-
 	public function getCourseAdminEmail(): ?string
 	{
 		return $this->getAttribute('course_admin_email');
@@ -184,6 +160,30 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getFoundationYear(): ?string
+	{
+		return $this->getAttribute('foundation_year');
+	}
+
+
+	public function getSectionCanton(): ?string
+	{
+		return $this->getAttribute('section_canton');
+	}
+
+
+	public function getLanguage(): ?string
+	{
+		return $this->getAttribute('language');
+	}
+
+
+	public function getMitgliedTerminationBySectionOnly(): ?string
+	{
+		return $this->getAttribute('mitglied_termination_by_section_only');
+	}
+
+
 	public function isHasYouthOrganization(): ?bool
 	{
 		return $this->getAttribute('has_youth_organization');
@@ -205,6 +205,42 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	public function getMembershipSelfRegistrationUrl(): ?string
 	{
 		return $this->getAttribute('membership_self_registration_url');
+	}
+
+
+	public function getSectionFeeAdult(): ?string
+	{
+		return $this->getAttribute('section_fee_adult');
+	}
+
+
+	public function getSectionFeeYouth(): ?string
+	{
+		return $this->getAttribute('section_fee_youth');
+	}
+
+
+	public function getSectionFeeFamily(): ?string
+	{
+		return $this->getAttribute('section_fee_family');
+	}
+
+
+	public function getSectionEntryFeeAdult(): ?string
+	{
+		return $this->getAttribute('section_entry_fee_adult');
+	}
+
+
+	public function getSectionEntryFeeYouth(): ?string
+	{
+		return $this->getAttribute('section_entry_fee_youth');
+	}
+
+
+	public function getSectionEntryFeeFamily(): ?string
+	{
+		return $this->getAttribute('section_entry_fee_family');
 	}
 
 
