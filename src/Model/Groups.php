@@ -124,6 +124,12 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getOfferings(): ?string
+	{
+		return $this->getAttribute('offerings');
+	}
+
+
 	public function getNavisionId(): ?int
 	{
 		return $this->getAttribute('navision_id');

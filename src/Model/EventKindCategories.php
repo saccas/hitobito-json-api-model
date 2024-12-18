@@ -14,4 +14,10 @@ class EventKindCategories extends \Saccas\JsonApiModel\JsonApiModel
 	{
 		return $this->getAttribute('label');
 	}
+
+
+	public function getOrder(): ?int
+	{
+		return $this->getAttribute('order');
+	}
 }

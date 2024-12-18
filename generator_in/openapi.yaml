@@ -621,7 +621,7 @@ components:
       properties:
         id:
           type: string
-          example: '63'
+          example: '85'
         type:
           type: string
           enum:
@@ -904,7 +904,7 @@ components:
       properties:
         id:
           type: string
-          example: '69'
+          example: '27'
         type:
           type: string
           enum:
@@ -1108,7 +1108,7 @@ components:
       properties:
         id:
           type: string
-          example: '4'
+          example: '17'
         type:
           type: string
           enum:
@@ -1207,6 +1207,9 @@ components:
         label:
           type: string
           readOnly: true
+        order:
+          type: integer
+          readOnly: true
       additionalProperties: false
     event_kind_categories_relationships:
       "$ref": "#/components/schemas/jsonapi_relationships"
@@ -1215,7 +1218,7 @@ components:
       properties:
         id:
           type: string
-          example: '23'
+          example: '18'
         type:
           type: string
           enum:
@@ -1286,6 +1289,7 @@ components:
       enum:
       - id
       - label
+      - order
     event_kind_categories_sortable_attributes_list:
       description: Kind category sortable attributes
       type: array
@@ -1372,7 +1376,7 @@ components:
       properties:
         id:
           type: string
-          example: '93'
+          example: '47'
         type:
           type: string
           enum:
@@ -1506,7 +1510,7 @@ components:
       properties:
         id:
           type: string
-          example: '83'
+          example: '63'
         type:
           type: string
           enum:
@@ -1697,7 +1701,7 @@ components:
       properties:
         id:
           type: string
-          example: '12'
+          example: '63'
         type:
           type: string
           enum:
@@ -1863,7 +1867,7 @@ components:
       properties:
         id:
           type: string
-          example: '96'
+          example: '80'
         type:
           type: string
           enum:
@@ -2042,6 +2046,9 @@ components:
         deleted_at:
           type: string
           format: date-time
+          readOnly: true
+        offerings:
+          type: string
           readOnly: true
         navision_id:
           type: integer
@@ -2260,7 +2267,7 @@ components:
       properties:
         id:
           type: string
-          example: '6'
+          example: '21'
         type:
           type: string
           enum:
@@ -2349,6 +2356,7 @@ components:
       - created_at
       - updated_at
       - deleted_at
+      - offerings
       - navision_id
     groups_sortable_attributes_list:
       description: Group sortable attributes
@@ -2396,6 +2404,8 @@ components:
         - "-updated_at"
         - deleted_at
         - "-deleted_at"
+        - offerings
+        - "-offerings"
         - navision_id
         - "-navision_id"
       uniqueItems: true
@@ -2481,7 +2491,7 @@ components:
       properties:
         id:
           type: string
-          example: '97'
+          example: '57'
         type:
           type: string
           enum:
@@ -2642,7 +2652,7 @@ components:
       properties:
         id:
           type: string
-          example: '63'
+          example: '95'
         type:
           type: string
           enum:
@@ -2760,7 +2770,7 @@ components:
       properties:
         id:
           type: string
-          example: '13'
+          example: '2'
         type:
           type: string
           enum:
@@ -2976,7 +2986,7 @@ components:
       properties:
         id:
           type: string
-          example: '78'
+          example: '20'
         type:
           type: string
           enum:
@@ -3145,7 +3155,7 @@ components:
       properties:
         id:
           type: string
-          example: '4'
+          example: '28'
         type:
           type: string
           enum:
@@ -3317,7 +3327,7 @@ components:
       properties:
         id:
           type: string
-          example: '44'
+          example: '27'
         type:
           type: string
           enum:
@@ -3457,7 +3467,7 @@ components:
       properties:
         id:
           type: string
-          example: '44'
+          example: '12'
         type:
           type: string
           enum:
@@ -3695,7 +3705,7 @@ components:
           "$ref": "#/components/schemas/jsonapi_meta"
         id:
           type: string
-          example: '54'
+          example: '66'
       additionalProperties: false
     jsonapi_pagination:
       type: object
@@ -8538,6 +8548,15 @@ components:
       explode: false
       name: filter[with_archived][eq]
       description: "[Filter Group by with_archived using eq operator](https://jsonapi.org/format/#fetching-filtering)"
+    groups_filter_offerings_eq:
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      name: filter[offerings][eq]
+      description: "[Filter Group by offerings using eq operator](https://jsonapi.org/format/#fetching-filtering)"
     groups_filter_navision_id_eq:
       in: query
       schema:
@@ -12815,6 +12834,7 @@ paths:
     - "$ref": "#/components/parameters/groups_filter_deleted_at_lte"
     - "$ref": "#/components/parameters/groups_filter_with_deleted_eq"
     - "$ref": "#/components/parameters/groups_filter_with_archived_eq"
+    - "$ref": "#/components/parameters/groups_filter_offerings_eq"
     - "$ref": "#/components/parameters/groups_filter_navision_id_eq"
     - "$ref": "#/components/parameters/groups_filter_navision_id_not_eq"
     - "$ref": "#/components/parameters/groups_filter_navision_id_gt"
@@ -12996,6 +13016,7 @@ paths:
     - "$ref": "#/components/parameters/groups_filter_deleted_at_lte"
     - "$ref": "#/components/parameters/groups_filter_with_deleted_eq"
     - "$ref": "#/components/parameters/groups_filter_with_archived_eq"
+    - "$ref": "#/components/parameters/groups_filter_offerings_eq"
     - "$ref": "#/components/parameters/groups_filter_navision_id_eq"
     - "$ref": "#/components/parameters/groups_filter_navision_id_not_eq"
     - "$ref": "#/components/parameters/groups_filter_navision_id_gt"
