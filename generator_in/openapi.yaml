@@ -621,7 +621,7 @@ components:
       properties:
         id:
           type: string
-          example: '85'
+          example: '93'
         type:
           type: string
           enum:
@@ -830,6 +830,9 @@ components:
         program:
           type: string
           readOnly: true
+        link_external_site:
+          type: string
+          readOnly: true
         price_member:
           type: number
           format: float
@@ -842,19 +845,7 @@ components:
           type: number
           format: float
           readOnly: true
-        price_js_active_member:
-          type: number
-          format: float
-          readOnly: true
-        price_js_active_regular:
-          type: number
-          format: float
-          readOnly: true
-        price_js_passive_member:
-          type: number
-          format: float
-          readOnly: true
-        price_js_passive_regular:
+        price_special:
           type: number
           format: float
           readOnly: true
@@ -904,7 +895,7 @@ components:
       properties:
         id:
           type: string
-          example: '27'
+          example: '9'
         type:
           type: string
           enum:
@@ -1007,13 +998,11 @@ components:
       - specialities
       - similar_tours
       - program
+      - link_external_site
       - price_member
       - price_regular
       - price_subsidized
-      - price_js_active_member
-      - price_js_active_regular
-      - price_js_passive_member
-      - price_js_passive_regular
+      - price_special
     courses_sortable_attributes_list:
       description: Course sortable attributes
       type: array
@@ -1042,20 +1031,16 @@ components:
         - "-similar_tours"
         - program
         - "-program"
+        - link_external_site
+        - "-link_external_site"
         - price_member
         - "-price_member"
         - price_regular
         - "-price_regular"
         - price_subsidized
         - "-price_subsidized"
-        - price_js_active_member
-        - "-price_js_active_member"
-        - price_js_active_regular
-        - "-price_js_active_regular"
-        - price_js_passive_member
-        - "-price_js_passive_member"
-        - price_js_passive_regular
-        - "-price_js_passive_regular"
+        - price_special
+        - "-price_special"
       uniqueItems: true
     courses_related:
       description: Course relationships available for inclusion
@@ -1108,7 +1093,7 @@ components:
       properties:
         id:
           type: string
-          example: '17'
+          example: '29'
         type:
           type: string
           enum:
@@ -1218,7 +1203,7 @@ components:
       properties:
         id:
           type: string
-          example: '18'
+          example: '49'
         type:
           type: string
           enum:
@@ -1376,7 +1361,7 @@ components:
       properties:
         id:
           type: string
-          example: '47'
+          example: '9'
         type:
           type: string
           enum:
@@ -1510,7 +1495,7 @@ components:
       properties:
         id:
           type: string
-          example: '63'
+          example: '69'
         type:
           type: string
           enum:
@@ -1701,7 +1686,7 @@ components:
       properties:
         id:
           type: string
-          example: '63'
+          example: '29'
         type:
           type: string
           enum:
@@ -1867,7 +1852,7 @@ components:
       properties:
         id:
           type: string
-          example: '80'
+          example: '30'
         type:
           type: string
           enum:
@@ -2059,6 +2044,30 @@ components:
              This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
             See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
           readOnly: true
+        foundation_year:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
+        section_canton:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
+        language:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
+        mitglied_termination_by_section_only:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
         course_admin_email:
           type: string
           description: |2
@@ -2083,25 +2092,31 @@ components:
              This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
             See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
           readOnly: true
-        foundation_year:
+        abo_alpen_fee:
           type: string
           description: |2
              This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
             See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
           readOnly: true
-        section_canton:
+        abo_alpen_postage_abroad:
           type: string
           description: |2
              This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
             See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
           readOnly: true
-        language:
+        abo_touren_portal_fee:
           type: string
           description: |2
              This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
             See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
           readOnly: true
-        mitglied_termination_by_section_only:
+        abo_alpen_fee_article_number:
+          type: string
+          description: |2
+             This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
+            See [Graphiti Resource Extra fields](https://www.graphiti.dev/guides/concepts/resources#extra-fields) for more information.
+          readOnly: true
+        abo_alpen_postage_abroad_article_number:
           type: string
           description: |2
              This *extra field* will only be present if requested explicitely with the `extra_fields[groups]` parameter.
@@ -2267,7 +2282,7 @@ components:
       properties:
         id:
           type: string
-          example: '21'
+          example: '93'
         type:
           type: string
           enum:
@@ -2430,14 +2445,19 @@ components:
       type: string
       enum:
       - logo
-      - course_admin_email
-      - sac_newsletter_mailing_list_id
-      - sac_magazine_mailing_list_id
-      - sac_fundraising_mailing_list_id
       - foundation_year
       - section_canton
       - language
       - mitglied_termination_by_section_only
+      - course_admin_email
+      - sac_newsletter_mailing_list_id
+      - sac_magazine_mailing_list_id
+      - sac_fundraising_mailing_list_id
+      - abo_alpen_fee
+      - abo_alpen_postage_abroad
+      - abo_touren_portal_fee
+      - abo_alpen_fee_article_number
+      - abo_alpen_postage_abroad_article_number
       - has_youth_organization
       - members_count
       - membership_admission_through_gs
@@ -2491,7 +2511,7 @@ components:
       properties:
         id:
           type: string
-          example: '57'
+          example: '91'
         type:
           type: string
           enum:
@@ -2652,7 +2672,7 @@ components:
       properties:
         id:
           type: string
-          example: '95'
+          example: '75'
         type:
           type: string
           enum:
@@ -2770,7 +2790,7 @@ components:
       properties:
         id:
           type: string
-          example: '2'
+          example: '77'
         type:
           type: string
           enum:
@@ -2986,7 +3006,7 @@ components:
       properties:
         id:
           type: string
-          example: '20'
+          example: '83'
         type:
           type: string
           enum:
@@ -3155,7 +3175,7 @@ components:
       properties:
         id:
           type: string
-          example: '28'
+          example: '52'
         type:
           type: string
           enum:
@@ -3327,7 +3347,7 @@ components:
       properties:
         id:
           type: string
-          example: '27'
+          example: '31'
         type:
           type: string
           enum:
@@ -3467,7 +3487,7 @@ components:
       properties:
         id:
           type: string
-          example: '12'
+          example: '26'
         type:
           type: string
           enum:
@@ -3705,7 +3725,7 @@ components:
           "$ref": "#/components/schemas/jsonapi_meta"
         id:
           type: string
-          example: '66'
+          example: '49'
       additionalProperties: false
     jsonapi_pagination:
       type: object
