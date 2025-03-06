@@ -208,6 +208,12 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getLinkExternalSite(): ?string
+	{
+		return $this->getAttribute('link_external_site');
+	}
+
+
 	public function getPriceMember(): ?int
 	{
 		return $this->getAttribute('price_member');
@@ -226,27 +232,9 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getPriceJsActiveMember(): ?int
+	public function getPriceSpecial(): ?int
 	{
-		return $this->getAttribute('price_js_active_member');
-	}
-
-
-	public function getPriceJsActiveRegular(): ?int
-	{
-		return $this->getAttribute('price_js_active_regular');
-	}
-
-
-	public function getPriceJsPassiveMember(): ?int
-	{
-		return $this->getAttribute('price_js_passive_member');
-	}
-
-
-	public function getPriceJsPassiveRegular(): ?int
-	{
-		return $this->getAttribute('price_js_passive_regular');
+		return $this->getAttribute('price_special');
 	}
 
 

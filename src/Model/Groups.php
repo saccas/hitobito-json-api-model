@@ -142,6 +142,30 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getFoundationYear(): ?string
+	{
+		return $this->getAttribute('foundation_year');
+	}
+
+
+	public function getSectionCanton(): ?string
+	{
+		return $this->getAttribute('section_canton');
+	}
+
+
+	public function getLanguage(): ?string
+	{
+		return $this->getAttribute('language');
+	}
+
+
+	public function getMitgliedTerminationBySectionOnly(): ?string
+	{
+		return $this->getAttribute('mitglied_termination_by_section_only');
+	}
+
+
 	public function getCourseAdminEmail(): ?string
 	{
 		return $this->getAttribute('course_admin_email');
@@ -166,27 +190,33 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getFoundationYear(): ?string
+	public function getAboAlpenFee(): ?string
 	{
-		return $this->getAttribute('foundation_year');
+		return $this->getAttribute('abo_alpen_fee');
 	}
 
 
-	public function getSectionCanton(): ?string
+	public function getAboAlpenPostageAbroad(): ?string
 	{
-		return $this->getAttribute('section_canton');
+		return $this->getAttribute('abo_alpen_postage_abroad');
 	}
 
 
-	public function getLanguage(): ?string
+	public function getAboTourenPortalFee(): ?string
 	{
-		return $this->getAttribute('language');
+		return $this->getAttribute('abo_touren_portal_fee');
 	}
 
 
-	public function getMitgliedTerminationBySectionOnly(): ?string
+	public function getAboAlpenFeeArticleNumber(): ?string
 	{
-		return $this->getAttribute('mitglied_termination_by_section_only');
+		return $this->getAttribute('abo_alpen_fee_article_number');
+	}
+
+
+	public function getAboAlpenPostageAbroadArticleNumber(): ?string
+	{
+		return $this->getAttribute('abo_alpen_postage_abroad_article_number');
 	}
 
 
