@@ -100,6 +100,12 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function isSelfRegistrationRequireAdultConsent(): ?bool
+	{
+		return $this->getAttribute('self_registration_require_adult_consent');
+	}
+
+
 	public function getArchivedAt(): ?\DateTime
 	{
 		return $this->getDateAttribute('archived_at');
@@ -142,6 +148,12 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getPrivacyPolicies(): ?array
+	{
+		return $this->getAttribute('privacy_policies');
+	}
+
+
 	public function getFoundationYear(): ?string
 	{
 		return $this->getAttribute('foundation_year');
@@ -166,6 +178,12 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getToursEnabled(): ?string
+	{
+		return $this->getAttribute('tours_enabled');
+	}
+
+
 	public function getCourseAdminEmail(): ?string
 	{
 		return $this->getAttribute('course_admin_email');
@@ -175,12 +193,6 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	public function getSacNewsletterMailingListId(): ?string
 	{
 		return $this->getAttribute('sac_newsletter_mailing_list_id');
-	}
-
-
-	public function getSacMagazineMailingListId(): ?string
-	{
-		return $this->getAttribute('sac_magazine_mailing_list_id');
 	}
 
 
@@ -340,5 +352,14 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	public function getAdditionalEmails(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('additional_emails', \Saccas\HitobitoApi\Model\AdditionalEmails::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\MailingLists>
+	 */
+	public function getMailingLists(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('mailing_lists', \Saccas\HitobitoApi\Model\MailingLists::class);
 	}
 }
