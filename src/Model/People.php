@@ -52,6 +52,30 @@ class People extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getAddressCareOf(): ?string
+	{
+		return $this->getAttribute('address_care_of');
+	}
+
+
+	public function getStreet(): ?string
+	{
+		return $this->getAttribute('street');
+	}
+
+
+	public function getHousenumber(): ?string
+	{
+		return $this->getAttribute('housenumber');
+	}
+
+
+	public function getPostbox(): ?string
+	{
+		return $this->getAttribute('postbox');
+	}
+
+
 	public function getZipCode(): ?string
 	{
 		return $this->getAttribute('zip_code');
@@ -91,6 +115,24 @@ class People extends \Saccas\JsonApiModel\JsonApiModel
 	public function getLanguage(): ?string
 	{
 		return $this->getAttribute('language');
+	}
+
+
+	public function getPicture(): ?string
+	{
+		return $this->getAttribute('picture');
+	}
+
+
+	public function getUpdatedAt(): ?\DateTime
+	{
+		return $this->getDateAttribute('updated_at');
+	}
+
+
+	public function getAdditionalInformation(): ?string
+	{
+		return $this->getAttribute('additional_information');
 	}
 
 

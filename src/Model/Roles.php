@@ -34,6 +34,12 @@ class Roles extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getName(): ?string
+	{
+		return $this->getAttribute('name');
+	}
+
+
 	public function getPersonId(): ?int
 	{
 		return $this->getAttribute('person_id');

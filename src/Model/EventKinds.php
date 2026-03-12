@@ -82,6 +82,36 @@ class EventKinds extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getBriefDescription(): ?string
+	{
+		return $this->getAttribute('brief_description');
+	}
+
+
+	public function getSpecialities(): ?string
+	{
+		return $this->getAttribute('specialities');
+	}
+
+
+	public function getSimilarTours(): ?string
+	{
+		return $this->getAttribute('similar_tours');
+	}
+
+
+	public function getProgram(): ?string
+	{
+		return $this->getAttribute('program');
+	}
+
+
+	public function getSeoText(): ?string
+	{
+		return $this->getAttribute('seo_text');
+	}
+
+
 	public function getKindCategory(): ?EventKindCategories
 	{
 		return $this->getRelationSingle('kind_category', \Saccas\HitobitoApi\Model\EventKindCategories::class);

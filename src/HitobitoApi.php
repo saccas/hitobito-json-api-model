@@ -4,7 +4,13 @@ namespace Saccas\HitobitoApi;
 
 class HitobitoApi extends \Saccas\JsonApiModel\JsonApiManager
 {
-	public array $schemaRepositoryClassMap = ['additional_emails' => Repository\AdditionalEmailsRepository::class, 'courses' => Repository\CoursesRepository::class, 'dates' => Repository\DatesRepository::class, 'event_kind_categories' => Repository\EventKindCategoriesRepository::class, 'event_kinds' => Repository\EventKindsRepository::class, 'event_levels' => Repository\EventLevelsRepository::class, 'events' => Repository\EventsRepository::class, 'external_invoices' => Repository\ExternalInvoicesRepository::class, 'groups' => Repository\GroupsRepository::class, 'invoice_items' => Repository\InvoiceItemsRepository::class, 'invoices' => Repository\InvoicesRepository::class, 'person-name' => Repository\PersonNameRepository::class, 'people' => Repository\PeopleRepository::class, 'phone_numbers' => Repository\PhoneNumbersRepository::class, 'roles' => Repository\RolesRepository::class, 'social_accounts' => Repository\SocialAccountsRepository::class, ];
+	public array $schemaRepositoryClassMap = ['additional_addresses' => Repository\AdditionalAddressesRepository::class, 'additional_emails' => Repository\AdditionalEmailsRepository::class, 'courses' => Repository\CoursesRepository::class, 'dates' => Repository\DatesRepository::class, 'event_kind_categories' => Repository\EventKindCategoriesRepository::class, 'event_kinds' => Repository\EventKindsRepository::class, 'event_levels' => Repository\EventLevelsRepository::class, 'tours' => Repository\ToursRepository::class, 'events' => Repository\EventsRepository::class, 'external_invoices' => Repository\ExternalInvoicesRepository::class, 'groups' => Repository\GroupsRepository::class, 'invoice_items' => Repository\InvoiceItemsRepository::class, 'invoices' => Repository\InvoicesRepository::class, 'mailing_lists' => Repository\MailingListsRepository::class, 'person-name' => Repository\PersonNameRepository::class, 'people' => Repository\PeopleRepository::class, 'phone_numbers' => Repository\PhoneNumbersRepository::class, 'roles' => Repository\RolesRepository::class, 'self_registrations' => Repository\SelfRegistrationsRepository::class, 'social_accounts' => Repository\SocialAccountsRepository::class, ];
+
+
+	public function getAdditionalAddressesRepository(): Repository\AdditionalAddressesRepository
+	{
+		return $this->getRepository('additional_addresses');
+	}
 
 
 	public function getAdditionalEmailsRepository(): Repository\AdditionalEmailsRepository
@@ -43,6 +49,12 @@ class HitobitoApi extends \Saccas\JsonApiModel\JsonApiManager
 	}
 
 
+	public function getToursRepository(): Repository\ToursRepository
+	{
+		return $this->getRepository('tours');
+	}
+
+
 	public function getEventsRepository(): Repository\EventsRepository
 	{
 		return $this->getRepository('events');
@@ -73,6 +85,12 @@ class HitobitoApi extends \Saccas\JsonApiModel\JsonApiManager
 	}
 
 
+	public function getMailingListsRepository(): Repository\MailingListsRepository
+	{
+		return $this->getRepository('mailing_lists');
+	}
+
+
 	public function getPersonNameRepository(): Repository\PersonNameRepository
 	{
 		return $this->getRepository('person-name');
@@ -94,6 +112,12 @@ class HitobitoApi extends \Saccas\JsonApiModel\JsonApiManager
 	public function getRolesRepository(): Repository\RolesRepository
 	{
 		return $this->getRepository('roles');
+	}
+
+
+	public function getSelfRegistrationsRepository(): Repository\SelfRegistrationsRepository
+	{
+		return $this->getRepository('self_registrations');
 	}
 
 
