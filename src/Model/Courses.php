@@ -112,7 +112,7 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getTrainingDays(): ?int
+	public function getTrainingDays(): ?float
 	{
 		return $this->getAttribute('training_days');
 	}
@@ -214,25 +214,25 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getPriceMember(): ?int
+	public function getPriceMember(): ?float
 	{
 		return $this->getAttribute('price_member');
 	}
 
 
-	public function getPriceRegular(): ?int
+	public function getPriceRegular(): ?float
 	{
 		return $this->getAttribute('price_regular');
 	}
 
 
-	public function getPriceSubsidized(): ?int
+	public function getPriceSubsidized(): ?float
 	{
 		return $this->getAttribute('price_subsidized');
 	}
 
 
-	public function getPriceSpecial(): ?int
+	public function getPriceSpecial(): ?float
 	{
 		return $this->getAttribute('price_special');
 	}

@@ -28,13 +28,13 @@ class InvoiceItems extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getUnitCost(): ?int
+	public function getUnitCost(): ?float
 	{
 		return $this->getAttribute('unit_cost');
 	}
 
 
-	public function getVatRate(): ?int
+	public function getVatRate(): ?float
 	{
 		return $this->getAttribute('vat_rate');
 	}
