@@ -64,7 +64,7 @@ class ExternalInvoices extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getTotal(): ?int
+	public function getTotal(): ?float
 	{
 		return $this->getAttribute('total');
 	}
