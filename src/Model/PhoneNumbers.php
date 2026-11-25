@@ -22,6 +22,12 @@ class PhoneNumbers extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getCategoryId(): ?int
+	{
+		return $this->getAttribute('category_id');
+	}
+
+
 	public function getContactableId(): ?int
 	{
 		return $this->getAttribute('contactable_id');
@@ -37,5 +43,11 @@ class PhoneNumbers extends \Saccas\JsonApiModel\JsonApiModel
 	public function getNumber(): ?string
 	{
 		return $this->getAttribute('number');
+	}
+
+
+	public function getCategoryName(): ?string
+	{
+		return $this->getAttribute('category_name');
 	}
 }

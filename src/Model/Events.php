@@ -94,6 +94,12 @@ class Events extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function isParticipationsVisible(): ?bool
+	{
+		return $this->getAttribute('participations_visible');
+	}
+
+
 	public function getCreatedAt(): ?\DateTime
 	{
 		return $this->getDateAttribute('created_at');
@@ -112,6 +118,12 @@ class Events extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getContactDetails(): ?ContactDetails
+	{
+		return $this->getRelationSingle('contact_details', \Saccas\HitobitoApi\Model\ContactDetails::class);
+	}
+
+
 	public function getKind(): ?Kind
 	{
 		return $this->getRelationSingle('kind', \Saccas\HitobitoApi\Model\Kind::class);
@@ -124,5 +136,14 @@ class Events extends \Saccas\JsonApiModel\JsonApiModel
 	public function getDates(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('dates', \Saccas\HitobitoApi\Model\Dates::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Participations>
+	 */
+	public function getParticipations(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('participations', \Saccas\HitobitoApi\Model\Participations::class);
 	}
 }

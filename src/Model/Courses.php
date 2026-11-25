@@ -94,6 +94,12 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function isParticipationsVisible(): ?bool
+	{
+		return $this->getAttribute('participations_visible');
+	}
+
+
 	public function getCreatedAt(): ?\DateTime
 	{
 		return $this->getDateAttribute('created_at');
@@ -130,6 +136,18 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getTeamerCount(): ?int
+	{
+		return $this->getAttribute('teamer_count');
+	}
+
+
+	public function isDisplayBookingInfo(): ?bool
+	{
+		return $this->getAttribute('display_booking_info');
+	}
+
+
 	public function getMinimumParticipants(): ?int
 	{
 		return $this->getAttribute('minimum_participants');
@@ -139,12 +157,6 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	public function getNumber(): ?string
 	{
 		return $this->getAttribute('number');
-	}
-
-
-	public function getTeamerCount(): ?int
-	{
-		return $this->getAttribute('teamer_count');
 	}
 
 
@@ -244,6 +256,12 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getContactDetails(): ?ContactDetails
+	{
+		return $this->getRelationSingle('contact_details', \Saccas\HitobitoApi\Model\ContactDetails::class);
+	}
+
+
 	public function getKind(): ?EventKinds
 	{
 		return $this->getRelationSingle('kind', \Saccas\HitobitoApi\Model\EventKinds::class);
@@ -256,6 +274,15 @@ class Courses extends \Saccas\JsonApiModel\JsonApiModel
 	public function getDates(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('dates', \Saccas\HitobitoApi\Model\Dates::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Participations>
+	 */
+	public function getParticipations(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('participations', \Saccas\HitobitoApi\Model\Participations::class);
 	}
 
 

@@ -70,7 +70,7 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getZipCode(): ?int
+	public function getZipCode(): ?string
 	{
 		return $this->getAttribute('zip_code');
 	}
@@ -148,6 +148,12 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getLanguage(): ?string
+	{
+		return $this->getAttribute('language');
+	}
+
+
 	public function getPrivacyPolicies(): ?array
 	{
 		return $this->getAttribute('privacy_policies');
@@ -163,12 +169,6 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	public function getSectionCanton(): ?string
 	{
 		return $this->getAttribute('section_canton');
-	}
-
-
-	public function getLanguage(): ?string
-	{
-		return $this->getAttribute('language');
 	}
 
 
@@ -352,6 +352,15 @@ class Groups extends \Saccas\JsonApiModel\JsonApiModel
 	public function getAdditionalEmails(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('additional_emails', \Saccas\HitobitoApi\Model\AdditionalEmails::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\AdditionalAddresses>
+	 */
+	public function getAdditionalAddresses(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('additional_addresses', \Saccas\HitobitoApi\Model\AdditionalAddresses::class);
 	}
 
 
