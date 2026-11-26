@@ -94,6 +94,12 @@ class Tours extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function isParticipationsVisible(): ?bool
+	{
+		return $this->getAttribute('participations_visible');
+	}
+
+
 	public function getCreatedAt(): ?\DateTime
 	{
 		return $this->getDateAttribute('created_at');
@@ -112,6 +118,18 @@ class Tours extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getSeason(): ?string
+	{
+		return $this->getAttribute('season');
+	}
+
+
+	public function isSubito(): ?bool
+	{
+		return $this->getAttribute('subito');
+	}
+
+
 	public function getApplicantCount(): ?int
 	{
 		return $this->getAttribute('applicant_count');
@@ -124,15 +142,21 @@ class Tours extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getMinimumParticipants(): ?int
-	{
-		return $this->getAttribute('minimum_participants');
-	}
-
-
 	public function getTeamerCount(): ?int
 	{
 		return $this->getAttribute('teamer_count');
+	}
+
+
+	public function isDisplayBookingInfo(): ?bool
+	{
+		return $this->getAttribute('display_booking_info');
+	}
+
+
+	public function getMinimumParticipants(): ?int
+	{
+		return $this->getAttribute('minimum_participants');
 	}
 
 
@@ -154,9 +178,75 @@ class Tours extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getSeason(): ?string
+	public function getDuration(): ?int
 	{
-		return $this->getAttribute('season');
+		return $this->getAttribute('duration');
+	}
+
+
+	public function getMaps(): ?string
+	{
+		return $this->getAttribute('maps');
+	}
+
+
+	public function getAlternativeRoute(): ?string
+	{
+		return $this->getAttribute('alternative_route');
+	}
+
+
+	public function getAdditionalInfo(): ?string
+	{
+		return $this->getAttribute('additional_info');
+	}
+
+
+	public function getTourenportalLink(): ?string
+	{
+		return $this->getAttribute('tourenportal_link');
+	}
+
+
+	public function getPriceMember(): ?float
+	{
+		return $this->getAttribute('price_member');
+	}
+
+
+	public function getPriceRegular(): ?float
+	{
+		return $this->getAttribute('price_regular');
+	}
+
+
+	public function getPriceSpecial(): ?float
+	{
+		return $this->getAttribute('price_special');
+	}
+
+
+	public function getPriceDescription(): ?string
+	{
+		return $this->getAttribute('price_description');
+	}
+
+
+	public function isSpecialMayApply(): ?bool
+	{
+		return $this->getAttribute('special_may_apply');
+	}
+
+
+	public function isMemberMayApply(): ?bool
+	{
+		return $this->getAttribute('member_may_apply');
+	}
+
+
+	public function isRegularMayApply(): ?bool
+	{
+		return $this->getAttribute('regular_may_apply');
 	}
 
 
@@ -172,21 +262,15 @@ class Tours extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
-	public function getTourenportalLink(): ?string
-	{
-		return $this->getAttribute('tourenportal_link');
-	}
-
-
-	public function isSubito(): ?bool
-	{
-		return $this->getAttribute('subito');
-	}
-
-
 	public function getContact(): ?Contact
 	{
 		return $this->getRelationSingle('contact', \Saccas\HitobitoApi\Model\Contact::class);
+	}
+
+
+	public function getContactDetails(): ?ContactDetails
+	{
+		return $this->getRelationSingle('contact_details', \Saccas\HitobitoApi\Model\ContactDetails::class);
 	}
 
 
@@ -206,10 +290,61 @@ class Tours extends \Saccas\JsonApiModel\JsonApiModel
 
 
 	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Participations>
+	 */
+	public function getParticipations(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('participations', \Saccas\HitobitoApi\Model\Participations::class);
+	}
+
+
+	/**
 	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Leaders>
 	 */
 	public function getLeaders(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('leaders', \Saccas\HitobitoApi\Model\Leaders::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Activities>
+	 */
+	public function getActivities(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('activities', \Saccas\HitobitoApi\Model\Activities::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\TargetGroups>
+	 */
+	public function getTargetGroups(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('target_groups', \Saccas\HitobitoApi\Model\TargetGroups::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\TechnicalRequirements>
+	 */
+	public function getTechnicalRequirements(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('technical_requirements', \Saccas\HitobitoApi\Model\TechnicalRequirements::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Traits>
+	 */
+	public function getTraits(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('traits', \Saccas\HitobitoApi\Model\Traits::class);
+	}
+
+
+	public function getFitnessRequirement(): ?FitnessRequirement
+	{
+		return $this->getRelationSingle('fitness_requirement', \Saccas\HitobitoApi\Model\FitnessRequirement::class);
 	}
 }

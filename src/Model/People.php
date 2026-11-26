@@ -94,6 +94,12 @@ class People extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getHouseholdKey(): ?string
+	{
+		return $this->getAttribute('household_key');
+	}
+
+
 	public function getPrimaryGroupId(): ?int
 	{
 		return $this->getAttribute('primary_group_id');
@@ -212,6 +218,15 @@ class People extends \Saccas\JsonApiModel\JsonApiModel
 
 
 	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\Qualifications>
+	 */
+	public function getQualifications(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('qualifications', \Saccas\HitobitoApi\Model\Qualifications::class);
+	}
+
+
+	/**
 	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\PhoneNumbers>
 	 */
 	public function getPhoneNumbers(): \Illuminate\Support\Collection
@@ -235,5 +250,23 @@ class People extends \Saccas\JsonApiModel\JsonApiModel
 	public function getAdditionalEmails(): \Illuminate\Support\Collection
 	{
 		return $this->getRelationMultiple('additional_emails', \Saccas\HitobitoApi\Model\AdditionalEmails::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\AdditionalAddresses>
+	 */
+	public function getAdditionalAddresses(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('additional_addresses', \Saccas\HitobitoApi\Model\AdditionalAddresses::class);
+	}
+
+
+	/**
+	 * @return \Illuminate\Support\Collection<\Saccas\HitobitoApi\Model\EventParticipations>
+	 */
+	public function getEventParticipations(): \Illuminate\Support\Collection
+	{
+		return $this->getRelationMultiple('event_participations', \Saccas\HitobitoApi\Model\EventParticipations::class);
 	}
 }

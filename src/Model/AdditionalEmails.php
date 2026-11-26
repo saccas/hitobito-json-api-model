@@ -22,6 +22,12 @@ class AdditionalEmails extends \Saccas\JsonApiModel\JsonApiModel
 	}
 
 
+	public function getCategoryId(): ?int
+	{
+		return $this->getAttribute('category_id');
+	}
+
+
 	public function getContactableId(): ?int
 	{
 		return $this->getAttribute('contactable_id');
@@ -37,5 +43,23 @@ class AdditionalEmails extends \Saccas\JsonApiModel\JsonApiModel
 	public function getEmail(): ?string
 	{
 		return $this->getAttribute('email');
+	}
+
+
+	public function isMailings(): ?bool
+	{
+		return $this->getAttribute('mailings');
+	}
+
+
+	public function isInvoices(): ?bool
+	{
+		return $this->getAttribute('invoices');
+	}
+
+
+	public function getCategoryName(): ?string
+	{
+		return $this->getAttribute('category_name');
 	}
 }
